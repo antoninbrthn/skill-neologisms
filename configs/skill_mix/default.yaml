@@ -1,0 +1,42 @@
+model:
+  name: "meta-llama/Llama-3.2-3B-Instruct"
+  type: "hf"
+  skills: []
+
+generation:
+  max_new_tokens: 512
+  temperature: 1.0
+  do_sample: true
+  batch_size: 32
+  prompt_version: "default"
+
+skill_mix:
+  k: 2
+  num_combinations: 50
+  num_topics: 1
+  fix_topics: false
+  seed: 42
+  skills_csv: null
+  topics_txt: null
+  use_specific_skills: false
+  new_skills: []
+  train_skills: []
+  test_skills: []
+  exclude_skills: []
+
+grading:
+  enabled: true
+  grader_model: "gpt-5"
+  prompt_version: "gpt"
+  use_batch: true
+  batch_size: 32
+  max_tokens: 4096
+
+output:
+  dir: null
+
+wandb:
+  enabled: true
+  tags: []
+  notes: ""
+  project: "skill-neologisms-skillmix"

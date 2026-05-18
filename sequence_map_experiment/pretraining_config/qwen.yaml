@@ -1,0 +1,62 @@
+run_id: null
+output_dir: null
+
+wandb:
+  enabled: true
+  project: "skill-neologisms"
+  entity: null
+  tags: ["pretrain", "multiphase", "qwen05b"]
+  name: null
+
+training:
+  num_train_epochs: 3
+  per_device_train_batch_size: 64
+  per_device_eval_batch_size: 64
+  gradient_accumulation_steps: 1
+  learning_rate: 2e-4
+  warmup_steps: 500
+  save_steps: 500
+  eval_steps: 500
+
+lora_cfg:
+  lora_r: 32
+  lora_alpha: 32
+  lora_dropout: 0.1
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+phases:
+  - name: "phase-1"
+    train: true
+    dataset:
+      num_train_samples: 100_000
+      num_test_samples: 500
+      min_ops: 1
+      max_ops: 1
+      random_left_pad: true
+      random_skill_pad: false
+      seq_len: 9
+      seq_len_min: 2
+      ops: ["[ASC]", "[DESC]", "[ADD]", "[SUB]", "[POLARITY]", "[REVERSE]", "[ID]"]
+      reject_len: [5, 7, 9]
+    training:
+      learning_rate: 2e-4
+
+  - name: "phase-2"
+    train: true
+    dataset:
+      num_train_samples: 500_000
+      num_test_samples: 500
+      min_ops: 1
+      max_ops: 3
+      random_left_pad: true
+      random_skill_pad: false
+      seq_len: 9
+      seq_len_min: 2
+      ops: ["[ASC]", "[DESC]", "[ADD]", "[SUB]", "[POLARITY]", "[REVERSE]", "[ID]"]
+      reject_len: [5, 7, 9]
+      reject_3ops_ratio: 0.25
+    training:
+      learning_rate: 2e-4
+
+model:
+  name: "Qwen/Qwen2.5-0.5B"

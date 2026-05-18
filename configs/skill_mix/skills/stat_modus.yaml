@@ -1,0 +1,8 @@
+# @package model
+skills:
+  - name: "stat_syllogism"
+    checkpoint_path: "antoninbrthn/skill-neologisms-llama3-skillmix-stat-syllogism"  # from HF hub
+    replace_str: "statistical syllogism"
+  - name: "modus_ponens"
+    checkpoint_path: "antoninbrthn/skill-neologisms-llama3-skillmix-modus"  # from HF hub
+    replace_str: "modus ponens"

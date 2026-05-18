@@ -1,0 +1,51 @@
+pretrained:
+  checkpoint: "antoninbrthn/skill-neologisms-qwen2.5-digitseq-base"
+
+skill:
+  name: ${dataset.skill_op}  # target skill should be the same as skill_op in dataset config, eg "[SHIFT_RIGHT]"
+  length: 20
+  description: ""
+  init_method: "from_pretrain_skills"
+
+dataset:
+  skill_op: "[SHIFT_RIGHT]"
+  test_op: "[ADD]"
+  num_samples: 100000
+  val_dataset_size: 1000
+  test_dataset_size: 200
+  seq_length: 9
+  seq_len_min: 2
+  reject_len: [5, 7, 9]
+  min_ops: 1
+  max_ops: 3
+  corrupt_ops_ratio: ???  # between 0 and 1, proportion of corrupted skill labels operations in training set
+
+wandb:
+  enabled: true
+  project: "skill-neologisms"
+  tags: ["skill-tokens-corrupt"]
+
+training:
+  max_length: 512
+  max_new_tokens: 10
+
+trainer_args:
+  num_train_epochs: 2
+  learning_rate: 5e-3
+  per_device_train_batch_size: 32
+  per_device_eval_batch_size: 32
+  gradient_accumulation_steps: 1
+  logging_strategy: "steps"
+  eval_strategy: "steps"
+  warmup_steps: 500
+  save_steps: 500
+  eval_steps: 500
+  save_total_limit: 1000
+  logging_steps: 100
+  do_eval: true
+  logging_dir: "./logs"
+  eval_on_start: true
+
+output:
+  save_dir: "skill_tokens_var_k"
+  save_history: true

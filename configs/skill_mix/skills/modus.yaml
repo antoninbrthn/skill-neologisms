@@ -1,0 +1,5 @@
+# @package model
+skills:
+  - name: "modus_ponens"
+    checkpoint_path: "antoninbrthn/skill-neologisms-llama3-skillmix-modus"  # from HF hub
+    replace_str: "modus ponens"

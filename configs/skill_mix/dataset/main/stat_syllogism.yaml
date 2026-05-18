@@ -1,0 +1,9 @@
+# @package _global_
+dataset:
+  skill_name: "stat_syllogism"
+  skill_display_name: "Statistical Syllogism"
+  skill_mix_name: "statistical syllogism"
+  dataset_version: "main"
+  dataset_path: "data/skill_mix/train_data_stat.csv"
+  col_prompt: "prompt"
+  col_completion: "raw_completion"

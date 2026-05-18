@@ -1,0 +1,15 @@
+__pycache__/
+.vscode/
+*.pt
+*.log
+.DS_Store
+*.pyc
+.ipynb_checkpoints/
+*.egg-info/
+
+checkpoints/
+wandb/
+figs/
+exports/
+
+**/.hydra/*

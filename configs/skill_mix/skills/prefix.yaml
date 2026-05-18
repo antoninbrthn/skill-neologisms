@@ -1,0 +1,5 @@
+# @package model
+skills:
+  - name: "PREFIX"
+    checkpoint_path: null  # set dynamically
+    prepend: true          # prepend to prompt instead of replacing a string

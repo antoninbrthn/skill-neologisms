@@ -1,0 +1,41 @@
+model:
+  name: "gpt-5"
+  type: "api"
+
+generation:
+  max_new_tokens: 20000
+  temperature: 1.0
+  do_sample: true
+  batch_size: 16
+  prompt_version: "default"
+
+skill_mix:
+  k: 3
+  num_combinations: 100
+  num_topics: 1
+  fix_topics: false
+  seed: 123
+  skills_csv: null
+  topics_txt: "src/skill_mix/topics_train.txt"
+  use_specific_skills: true
+  new_skills: ["modus ponens"]
+  train_skills: []
+  test_skills: ["emotional self regulation", "metaphor"]
+  exclude_skills: ["complex question (loaded question with implicit assumption )", "statistical syllogism", "accident (fallacy)"]
+
+grading:
+  enabled: false
+  max_tokens: 4096
+  grader_model: "gpt-5"
+  prompt_version: "gpt"
+  use_batch: true
+  batch_size: 16
+
+output:
+  dir: null
+
+wandb:
+  enabled: true
+  tags: ["train_data_modus"]
+  notes: "Generate SkillMix training data centered on modus ponens."
+  project: "skill-neologisms-skillmix"
